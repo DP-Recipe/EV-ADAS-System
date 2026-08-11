@@ -1,0 +1,27 @@
+# STM32CubeIDE generated files
+Debug/
+Release/
+Binaries/
+
+# STM32CubeIDE metadata
+.settings/
+
+# Build artifacts
+*.o
+*.d
+*.elf
+*.map
+*.hex
+*.bin
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Python virtual environments
+venv/
+.venv/
+
+# OS files
+.DS_Store
+Thumbs.db
