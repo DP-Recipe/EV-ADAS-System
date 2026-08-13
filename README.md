@@ -1,700 +1,314 @@
-\# EV ADAS System
+# 🚗 EV ADAS System
 
+### Simulation-Based Electric Vehicle Control & Advanced Driver Assistance System
 
+A **simulation-based EV control and ADAS project** developed using **STM32F103C8T6 firmware**, **PICSimLab**, **VSPE**, and a **Python real-time dashboard**.
 
-A simulation-based Electric Vehicle (EV) control and Advanced Driver Assistance System (ADAS) developed using \*\*STM32F103C8T6 firmware\*\*, \*\*PICSimLab\*\*, \*\*VSPE\*\*, and a \*\*Python-based real-time dashboard\*\*.
+The system simulates core EV control functions and ADAS features while communicating vehicle data from the simulated STM32 environment to a PC-based dashboard through a virtual serial connection.
 
+---
 
+## 📌 Project Overview
 
-The project simulates an EV control system and ADAS functionality in a virtual embedded environment. The STM32 firmware is executed within \*\*PICSimLab\*\*, while \*\*VSPE (Virtual Serial Ports Emulator)\*\* provides the virtual serial connection between the simulation and the Python dashboard.
+The project combines **embedded C firmware, automotive control logic, ADAS algorithms, sensor simulation, UART communication, and real-time data visualization** into a single simulation environment.
 
-
-
-\## System Overview
-
-
-
-The project consists of three main components:
-
-
-
-1\. \*\*STM32 Firmware\*\* – Embedded C code developed using STM32CubeIDE.
-
-2\. \*\*PICSimLab Simulation\*\* – Used to simulate the STM32-based system and its inputs/sensors.
-
-3\. \*\*Python Dashboard\*\* – Displays the simulated vehicle parameters and ADAS status in real time.
-
-
-
-Communication between PICSimLab and the Python dashboard is established using \*\*VSPE\*\*, which creates a pair of interconnected virtual COM ports.
-
-
-
-\## Features
-
-
-
-\### EV Control
-
-
-
-\* Accelerator and brake pedal monitoring through ADC
-
-\* Multiple drive modes:
-
-
-
-&#x20; \* ECO
-
-&#x20; \* NORMAL
-
-&#x20; \* SPORT
-
-\* Motor torque calculation
-
-\* Regenerative braking
-
-\* Vehicle speed estimation
-
-\* Battery State of Charge (SOC) estimation
-
-\* Estimated driving range
-
-\* Motor temperature monitoring
-
-\* Vehicle state management
-
-
-
-\### ADAS
-
-
-
-\* Forward Collision Warning (FCW)
-
-\* Time-to-Collision (TTC) estimation
-
-\* Blind Spot Detection (BSD)
-
-\* Distance-based warning levels
-
-\* Critical collision warnings
-
-\* Ultrasonic sensor-based distance measurement
-
-
-
-\### Fault Management
-
-
-
-\* Vehicle fault detection
-
-\* Fault-state handling
-
-\* Safe-state transitions
-
-\* Monitoring of system operating conditions
-
-
-
-\### Real-Time Dashboard
-
-
-
-The Python dashboard receives data from the simulated STM32 system and displays:
-
-
-
-\* Vehicle speed
-
-\* Battery SOC
-
-\* Motor temperature
-
-\* Drive mode
-
-\* Vehicle state
-
-\* ADAS warnings
-
-\* Sensor information
-
-\* Vehicle status
-
-
-
-\## System Architecture
-
-
+The STM32 firmware is executed within **PICSimLab**, while **VSPE (Virtual Serial Ports Emulator)** provides the virtual serial communication link between the simulation and the Python dashboard.
 
 ```text
-
-&#x20;                  ┌──────────────────────────┐
-
-&#x20;                  │     PICSimLab Simulation  │
-
-&#x20;                  │                          │
-
-&#x20;                  │     STM32F103C8T6        │
-
-&#x20;                  │                          │
-
-&#x20;                  │  EV Control              │
-
-&#x20;                  │  ADAS Logic              │
-
-&#x20;                  │  Fault Management        │
-
-&#x20;                  │  Sensor Processing       │
-
-&#x20;                  └────────────┬─────────────┘
-
-&#x20;                               │
-
-&#x20;                        Virtual COM Port
-
-&#x20;                               │
-
-&#x20;                               ▼
-
-&#x20;                  ┌──────────────────────────┐
-
-&#x20;                  │           VSPE           │
-
-&#x20;                  │ Virtual Serial Port      │
-
-&#x20;                  │       Emulator           │
-
-&#x20;                  └────────────┬─────────────┘
-
-&#x20;                               │
-
-&#x20;                        Virtual COM Port
-
-&#x20;                               │
-
-&#x20;                               ▼
-
-&#x20;                  ┌──────────────────────────┐
-
-&#x20;                  │     Python Dashboard     │
-
-&#x20;                  │                          │
-
-&#x20;                  │  Speed                   │
-
-&#x20;                  │  SOC                     │
-
-&#x20;                  │  Temperature             │
-
-&#x20;                  │  Drive Mode              │
-
-&#x20;                  │  ADAS Status             │
-
-&#x20;                  │  Vehicle State           │
-
-&#x20;                  └──────────────────────────┘
-
+┌─────────────────────┐
+│      PICSimLab      │
+│                     │
+│  STM32F103C8T6      │
+│  EV Control         │
+│  ADAS Logic         │
+│  Sensor Processing  │
+│  Fault Management   │
+└──────────┬──────────┘
+           │
+       Virtual UART
+           │
+           ▼
+┌─────────────────────┐
+│        VSPE         │
+│ Virtual COM Ports   │
+└──────────┬──────────┘
+           │
+       Virtual UART
+           │
+           ▼
+┌─────────────────────┐
+│  Python Dashboard   │
+│                     │
+│ Speed               │
+│ SOC                 │
+│ Temperature         │
+│ Drive Mode          │
+│ ADAS Status         │
+│ Vehicle State       │
+└─────────────────────┘
 ```
 
+---
 
+## ⚙️ Key Features
 
-\## Simulation Environment
+### 🔋 EV Control
 
+* Accelerator and brake pedal monitoring
+* ECO, NORMAL and SPORT drive modes
+* Motor torque calculation
+* Regenerative braking
+* Vehicle speed estimation
+* Battery State of Charge (SOC) estimation
+* Driving range estimation
+* Motor temperature modelling
+* Vehicle state management
 
+### 🛡️ ADAS
 
-The complete system was developed and tested \*\*in simulation\*\*.
+* **Forward Collision Warning (FCW)**
+* **Time-to-Collision (TTC) estimation**
+* **Blind Spot Detection (BSD)**
+* Distance-based warning levels
+* Critical collision warnings
+* Ultrasonic sensor-based distance measurement
 
+### ⚠️ Fault Management
 
+* Fault detection
+* Vehicle fault-state handling
+* Safe-state transitions
+* System operating-condition monitoring
 
-\### PICSimLab
+### 📊 Real-Time Dashboard
 
+The Python dashboard provides real-time visualization of the simulated vehicle:
 
+* 🚗 Vehicle speed
+* 🔋 Battery SOC
+* 🌡️ Motor temperature
+* ⚙️ Drive mode
+* 🚦 Vehicle state
+* ⚠️ ADAS warnings
+* 📡 Sensor information
+* 🔧 System status
 
-\*\*PICSimLab\*\* is used as the embedded simulation environment. It provides the virtual hardware environment in which the STM32-based control system is tested.
+---
 
+## 🧠 Embedded System
 
+The STM32 firmware was developed using **STM32CubeIDE** and follows a modular architecture.
 
-The simulated inputs include parameters such as:
-
-
-
-\* Accelerator pedal
-
-\* Brake pedal
-
-\* Battery SOC
-
-\* Motor temperature
-
-\* Ultrasonic sensor measurements
-
-
-
-\### VSPE
-
-
-
-\*\*Virtual Serial Ports Emulator (VSPE)\*\* is used to create virtual serial ports that allow the PICSimLab simulation to communicate with the Python dashboard.
-
-
-
-The communication path is:
-
-
-
-```text
-
-PICSimLab
-
-&#x20;   │
-
-&#x20;   │ Virtual Serial Port
-
-&#x20;   ▼
-
-&#x20;  VSPE
-
-&#x20;   │
-
-&#x20;   │ Virtual Serial Port
-
-&#x20;   ▼
-
-Python Dashboard
-
-```
-
-
-
-\## Software Architecture
-
-
-
-The STM32 firmware is divided into multiple functional modules.
-
-
-
-\### EV Control
-
-
-
-`ev\_control.c`
-
-
+### EV Control — `ev_control.c`
 
 Responsible for:
 
+* Pedal input processing
+* Drive-mode selection
+* Motor torque calculation
+* Regenerative braking
+* Speed modelling
+* Power calculation
+* SOC estimation
+* Range estimation
+* Motor thermal modelling
 
-
-\* Accelerator and brake processing
-
-\* Drive-mode selection
-
-\* Motor torque calculation
-
-\* Regenerative braking
-
-\* Speed modelling
-
-\* Power calculation
-
-\* SOC estimation
-
-\* Range estimation
-
-\* Motor thermal modelling
-
-
-
-\### ADAS
-
-
-
-`adas.c`
-
-
+### ADAS — `adas.c`
 
 Implements:
 
+* Forward Collision Warning
+* Time-to-Collision calculation
+* Blind Spot Detection
+* Warning thresholds
+* Critical warning conditions
 
+### Ultrasonic Sensors — `ultrasonic.c`
 
-\* Forward Collision Warning
+Handles ultrasonic sensor timing and distance measurement used by the ADAS algorithms.
 
-\* Time-to-Collision estimation
+### Fault Management — `fault.c`
 
-\* Blind Spot Detection
+Handles fault detection and transitions into appropriate vehicle safety states.
 
-\* Warning thresholds
+### UART Communication — `uart_shell.c`
 
-\* Critical warning conditions
+Provides the serial communication interface used to transfer vehicle information between the simulated STM32 system and the Python dashboard.
 
+---
 
+## 🖥️ Simulation Environment
 
-\### Ultrasonic Sensors
+This project was developed and tested **completely in simulation** rather than on physical automotive hardware.
 
+### PICSimLab
 
+PICSimLab is used to provide the simulated embedded environment in which the STM32-based firmware and system inputs are tested.
 
-`ultrasonic.c`
+### VSPE
 
+**Virtual Serial Ports Emulator (VSPE)** creates interconnected virtual COM ports, allowing the PICSimLab simulation to communicate with the Python dashboard.
 
+### Python Dashboard
 
-Handles ultrasonic sensor timing and distance measurement used by the ADAS functions.
+The Python application receives the simulated vehicle data through the virtual serial connection and presents it through a real-time dashboard.
 
+---
 
-
-\### Fault Management
-
-
-
-`fault.c`
-
-
-
-Handles system fault detection and transitions into appropriate vehicle safety states.
-
-
-
-\### UART Communication
-
-
-
-`uart\_shell.c`
-
-
-
-Handles serial communication between the simulated STM32 system and the Python dashboard.
-
-
-
-\## Python Dashboard
-
-
-
-The dashboard is located at:
-
-
+## 🔄 Data Flow
 
 ```text
-
-ev\_python/ev\_dash.py
-
+Simulated Inputs
+      │
+      ▼
+  PICSimLab
+      │
+      ▼
+STM32 Firmware
+      │
+      ├── EV Control
+      ├── ADAS
+      ├── Fault Management
+      └── Sensor Processing
+      │
+      │ UART
+      ▼
+     VSPE
+      │
+      │ Virtual COM
+      ▼
+Python Dashboard
+      │
+      ▼
+Real-Time Vehicle Monitoring
 ```
 
+---
 
+## 🛠️ Technologies Used
 
-The Python application receives the simulated vehicle data through the virtual serial connection created using VSPE and presents the information through a real-time dashboard.
+| Category                 | Technologies      |
+| ------------------------ | ----------------- |
+| Microcontroller          | STM32F103C8T6     |
+| Firmware                 | Embedded C        |
+| IDE                      | STM32CubeIDE      |
+| Configuration            | STM32CubeMX       |
+| Simulation               | PICSimLab         |
+| Serial Communication     | UART              |
+| Virtual Serial Interface | VSPE              |
+| Dashboard                | Python            |
+| Embedded Libraries       | STM32 HAL         |
+| Peripherals              | ADC, UART, Timers |
 
+---
 
-
-\## Project Structure
-
-
+## 📁 Project Structure
 
 ```text
-
 EV-ADAS-System/
-
 │
-
-├── ev\_dash/
-
+├── ev_dash/
 │   ├── Core/
-
 │   │   ├── Inc/
-
 │   │   └── Src/
-
 │   │       ├── adas.c
-
-│   │       ├── ev\_control.c
-
+│   │       ├── ev_control.c
 │   │       ├── fault.c
-
 │   │       ├── main.c
-
-│   │       ├── uart\_shell.c
-
+│   │       ├── uart_shell.c
 │   │       └── ultrasonic.c
-
 │   │
-
 │   ├── Drivers/
-
 │   │   ├── CMSIS/
-
-│   │   └── STM32F1xx\_HAL\_Driver/
-
+│   │   └── STM32F1xx_HAL_Driver/
 │   │
-
 │   ├── Startup/
-
-│   ├── ev\_dash.ioc
-
-│   └── STM32F103C8TX\_FLASH.ld
-
+│   ├── ev_dash.ioc
+│   └── STM32F103C8TX_FLASH.ld
 │
-
-├── ev\_python/
-
-│   └── ev\_dash.py
-
+├── ev_python/
+│   └── ev_dash.py
 │
-
 ├── .gitignore
-
 └── README.md
-
 ```
 
+---
 
+## ▶️ Running the Project
 
-\## Tools \& Technologies
+### 1. STM32 Firmware
 
-
-
-\### Embedded Development
-
-
-
-\* STM32F103C8T6
-
-\* STM32CubeIDE
-
-\* STM32CubeMX
-
-\* Embedded C
-
-\* STM32 HAL
-
-\* ADC
-
-\* UART
-
-\* Timers
-
-
-
-\### Simulation \& Communication
-
-
-
-\* PICSimLab
-
-\* VSPE (Virtual Serial Ports Emulator)
-
-
-
-\### Dashboard
-
-
-
-\* Python
-
-\* Serial communication
-
-\* Real-time data visualization
-
-
-
-\## Running the Simulation
-
-
-
-\### 1. STM32 Firmware
-
-
-
-Open the STM32 project using \*\*STM32CubeIDE\*\*.
-
-
-
-Open:
-
-
+Open the project in **STM32CubeIDE** and load:
 
 ```text
-
-ev\_dash/ev\_dash.ioc
-
+ev_dash/ev_dash.ioc
 ```
 
+Build the project and generate the firmware required for the simulation.
 
+### 2. PICSimLab
 
-Build the project and generate the required firmware output for use with the simulation environment.
-
-
-
-\### 2. PICSimLab
-
-
-
-Open the corresponding simulation setup in \*\*PICSimLab\*\* and load the STM32 firmware into the simulated microcontroller environment.
-
-
+Open the corresponding PICSimLab simulation and load the generated STM32 firmware.
 
 Configure the required simulated inputs and sensors.
 
+### 3. VSPE
 
+Create a pair of interconnected virtual COM ports using VSPE.
 
-\### 3. VSPE
+Connect one virtual port to PICSimLab and use the other port for the Python dashboard.
 
-
-
-Create a pair of interconnected virtual COM ports using \*\*VSPE\*\*.
-
-
-
-One virtual port is connected to the PICSimLab serial interface and the other is used by the Python dashboard.
-
-
-
-\### 4. Python Dashboard
-
-
+### 4. Python Dashboard
 
 Navigate to:
 
-
-
 ```text
-
-ev\_python/
-
+ev_python/
 ```
 
-
-
-and run:
-
-
+Run:
 
 ```bash
-
-python ev\_dash.py
-
+python ev_dash.py
 ```
 
+Configure the dashboard to use the appropriate virtual COM port created by VSPE.
 
+---
 
-Configure the Python dashboard to use the appropriate virtual COM port created by VSPE.
-
-
-
-Once connected, the dashboard receives and displays the data generated by the simulated STM32 system.
-
-
-
-\## Communication Flow
-
-
-
-```text
-
-Simulated Sensors
-
-&#x20;      │
-
-&#x20;      ▼
-
-PICSimLab
-
-&#x20;      │
-
-&#x20;      ▼
-
-STM32F103C8T6 Firmware
-
-&#x20;      │
-
-&#x20;      │ UART
-
-&#x20;      ▼
-
-&#x20;    VSPE
-
-&#x20;      │
-
-&#x20;      │ Virtual COM
-
-&#x20;      ▼
-
-Python Dashboard
-
-```
-
-
-
-\## Project Goals
-
-
+## 🎯 Project Objectives
 
 The project was developed to explore the integration of:
 
+* Embedded systems
+* Electric vehicle control
+* ADAS algorithms
+* Sensor interfacing
+* UART communication
+* Embedded system simulation
+* Real-time monitoring
+* PC-based visualization
+
+The simulation-based approach enables development and testing of the complete system without requiring physical automotive hardware.
+
+---
+
+## 🚀 Future Scope
+
+* CAN bus integration and simulation
+* Real motor controller integration
+* Physical sensor integration
+* GPS integration
+* Camera-based ADAS
+* Advanced object detection
+* Vehicle data logging
+* Hardware-in-the-loop testing
+* Integration with a physical EV platform
+
+---
 
 
-\* Embedded systems
+---
 
-\* EV control algorithms
-
-\* ADAS logic
-
-\* Sensor interfacing
-
-\* UART communication
-
-\* Embedded simulation
-
-\* Real-time monitoring
-
-\* PC-based visualization
-
-
-
-The simulation approach allows the complete control and ADAS system to be developed and tested without requiring physical automotive hardware.
-
-
-
-\## Future Scope
-
-
-
-Potential improvements include:
-
-
-
-\* CAN bus simulation and integration
-
-\* Real motor controller integration
-
-\* Physical sensor integration
-
-\* GPS integration
-
-\* Camera-based ADAS
-
-\* Advanced object detection
-
-\* Data logging and trip analysis
-
-\* Hardware-in-the-loop testing
-
-\* Integration with a physical EV platform
-
-
-
-\## Author
-
-
-
-\*\*Pranav Dhamodharan\*\*
-
-
-
-Electronics and Communication Engineering
-
-SSN College of Engineering
-
-
-
+⭐ **If you find this project interesting, feel free to explore the implementation and simulation setup in the repository.**
