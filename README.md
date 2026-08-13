@@ -308,7 +308,3 @@ The simulation-based approach enables development and testing of the complete sy
 
 ---
 
-
----
-
-⭐ **If you find this project interesting, feel free to explore the implementation and simulation setup in the repository.**
