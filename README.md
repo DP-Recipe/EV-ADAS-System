@@ -1,4 +1,4 @@
-# 🚗 EV ADAS System
+#  EV ADAS System
 
 ### Simulation-Based Electric Vehicle Control & Advanced Driver Assistance System
 
@@ -8,7 +8,7 @@ The system simulates core EV control functions and ADAS features while communica
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 
 The project combines **embedded C firmware, automotive control logic, ADAS algorithms, sensor simulation, UART communication, and real-time data visualization** into a single simulation environment.
 
@@ -64,7 +64,7 @@ The STM32 firmware is executed within **PICSimLab**, while **VSPE (Virtual Seria
 * Motor temperature modelling
 * Vehicle state management
 
-### 🛡️ ADAS
+###  ADAS
 
 * **Forward Collision Warning (FCW)**
 * **Time-to-Collision (TTC) estimation**
@@ -73,29 +73,29 @@ The STM32 firmware is executed within **PICSimLab**, while **VSPE (Virtual Seria
 * Critical collision warnings
 * Ultrasonic sensor-based distance measurement
 
-### ⚠️ Fault Management
+### Fault Management
 
 * Fault detection
 * Vehicle fault-state handling
 * Safe-state transitions
 * System operating-condition monitoring
 
-### 📊 Real-Time Dashboard
+### Real-Time Dashboard
 
 The Python dashboard provides real-time visualization of the simulated vehicle:
 
-* 🚗 Vehicle speed
-* 🔋 Battery SOC
-* 🌡️ Motor temperature
-* ⚙️ Drive mode
-* 🚦 Vehicle state
-* ⚠️ ADAS warnings
-* 📡 Sensor information
-* 🔧 System status
+*  Vehicle speed
+*  Battery SOC
+* Motor temperature
+* Drive mode
+* Vehicle state
+*  ADAS warnings
+*  Sensor information
+*  System status
 
 ---
 
-## 🧠 Embedded System
+##  Embedded System
 
 The STM32 firmware was developed using **STM32CubeIDE** and follows a modular architecture.
 
@@ -137,7 +137,7 @@ Provides the serial communication interface used to transfer vehicle information
 
 ---
 
-## 🖥️ Simulation Environment
+##  Simulation Environment
 
 This project was developed and tested **completely in simulation** rather than on physical automotive hardware.
 
@@ -155,7 +155,7 @@ The Python application receives the simulated vehicle data through the virtual s
 
 ---
 
-## 🔄 Data Flow
+##  Data Flow
 
 ```text
 Simulated Inputs
@@ -185,7 +185,7 @@ Real-Time Vehicle Monitoring
 
 ---
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 | Category                 | Technologies      |
 | ------------------------ | ----------------- |
@@ -202,7 +202,7 @@ Real-Time Vehicle Monitoring
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```text
 EV-ADAS-System/
@@ -235,7 +235,7 @@ EV-ADAS-System/
 
 ---
 
-## ▶️ Running the Project
+##  Running the Project
 
 ### 1. STM32 Firmware
 
@@ -294,7 +294,7 @@ The simulation-based approach enables development and testing of the complete sy
 
 ---
 
-## 🚀 Future Scope
+##  Future Scope
 
 * CAN bus integration and simulation
 * Real motor controller integration
